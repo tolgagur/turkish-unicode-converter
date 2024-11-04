@@ -1,0 +1,51 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+  <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+  <id>com.tolgagureli.turkish-unicode-converter</id>
+
+  <!-- Public plugin name should be written in Title Case.
+       Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+  <name>Turkish Unicode Converter</name>
+
+  <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+  <vendor email="tolgagureli@outlook.com" url="https://github.com/tolgagur">Tolga Güreli</vendor>
+
+  <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+       Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+       Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+  <description><![CDATA[
+    The <strong>Turkish Unicode Converter</strong> plugin helps developers and users convert Turkish characters into their Unicode equivalents.<br>
+    <br>
+    <em>Features:</em>
+    <ul>
+      <li>Instant conversion of Turkish characters.</li>
+      <li>User-friendly interface for easy access.</li>
+      <li>Available in the main menu for quick use.</li>
+    </ul>
+    <br>
+    <strong>Get started</strong> by using the tool from the main menu and enhance your coding experience with accurate Unicode conversions.
+  ]]></description>
+
+  <!-- Product and plugin compatibility requirements.
+       Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+  <depends>com.intellij.modules.platform</depends>
+
+  <!-- Extension points defined by the plugin.
+       Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- You can define your extension points here -->
+  </extensions>
+
+  <actions>
+    <group id="lakj.comspace" text="Turkish Unicode Converter" description="Access Turkish Unicode Converter Tools">
+      <action
+              id="com.tolgagureli.UnicodeConverterToolWindowFactory"
+              class="com.tolgagureli.turkishunicodeconverter.UnicodeConverterToolWindowFactory"
+              text="Turkish Unicode Converter"
+              description="Open the Turkish Unicode Converter tool window."
+              icon="/icons/t-icon.png"/>
+      <add-to-group group-id="MainMenu" anchor="last"/>
+    </group>
+  </actions>
+
+</idea-plugin>
