@@ -3,14 +3,15 @@ package com.tolgagureli.turkishunicodeconverter;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class UnicodeConverterToolWindowFactory extends AnAction {
-    // Tablo verileri için sabitler
+
     private static final Object[][] DATA = {
             {"ç", "\\u00E7"},
             {"Ç", "\\u00C7"},
@@ -26,45 +27,86 @@ public class UnicodeConverterToolWindowFactory extends AnAction {
             {"İ", "\\u0130"}
     };
 
-    // Sütun başlıkları için sabit
     private static final String[] COLUMN_NAMES = {"Turkish Letter", "Unicode Value"};
-
-    // Pencere boyutları için sabitler
-    private static final int FRAME_WIDTH = 300;
-    private static final int FRAME_HEIGHT = 350;
+    private static final int FRAME_WIDTH = 400;
+    private static final int FRAME_HEIGHT = 400;
 
     @Override
     public void actionPerformed(AnActionEvent e) {
-        // Pencereyi oluştur ve göster
         createAndShowFrame();
     }
 
     private void createAndShowFrame() {
-        // Yeni bir pencere oluştur
-        JFrame frame = new JFrame("Turkish Unicode Converter");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setLayout(new BorderLayout());
-
-        // Tabloyu oluştur
+        JFrame frame = createFrame();
         JTable table = createTable();
+        JPanel panel = createInputPanel(frame);
+
         JScrollPane scrollPane = new JScrollPane(table);
         table.setFillsViewportHeight(true);
         frame.add(scrollPane, BorderLayout.CENTER);
+        frame.add(panel, BorderLayout.NORTH);
 
-        // Pencere boyutunu ve konumunu ayarla
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-        frame.setLocationRelativeTo(null); // Pencereyi ekranın ortasında aç
-        frame.setVisible(true); // Pencereyi göster
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+
+    private JFrame createFrame() {
+        JFrame frame = new JFrame("Turkish Unicode Converter");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        return frame;
     }
 
     private JTable createTable() {
-        // Tablo modeli oluştur ve hücrelerin düzenlenemez olmasını sağla
         DefaultTableModel tableModel = new DefaultTableModel(DATA, COLUMN_NAMES) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false; // Hücrelerin düzenlenmesine izin verme
+                return false; // Cells should not be editable
             }
         };
-        return new JTable(tableModel); // Tabloyu döndür
+        return new JTable(tableModel);
+    }
+
+    private JPanel createInputPanel(JFrame frame) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+
+        JTextField textField = new JTextField();
+        panel.add(textField, BorderLayout.NORTH);
+
+        JButton copyButton = new JButton("Copy to Clipboard");
+        copyButton.addActionListener(createCopyButtonListener(frame, textField));
+        panel.add(copyButton, BorderLayout.EAST);
+
+        return panel;
+    }
+
+    private ActionListener createCopyButtonListener(JFrame frame, JTextField textField) {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String inputText = textField.getText();
+                String convertedText = convertToUnicode(inputText);
+                copyToClipboard(convertedText);
+                showConvertedText(frame, convertedText);
+            }
+        };
+    }
+
+    private String convertToUnicode(String inputText) {
+        for (Object[] mapping : DATA) {
+            inputText = inputText.replace(mapping[0].toString(), mapping[1].toString());
+        }
+        return inputText;
+    }
+
+    private void copyToClipboard(String text) {
+        StringSelection stringSelection = new StringSelection(text);
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+    }
+
+    private void showConvertedText(JFrame frame, String convertedText) {
+        JOptionPane.showMessageDialog(frame, "Converted Text copied to clipboard: " + convertedText);
     }
 }
