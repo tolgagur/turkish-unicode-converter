@@ -37,14 +37,14 @@
   </extensions>
 
   <actions>
-    <group id="lakj.comspace" text="Turkish Unicode Converter" description="Access Turkish Unicode Converter Tools">
+    <group id="com.tolgagureli.turkishunicodeconverter.UnicodeConverterAction" text="Turkish Unicode Converter" description="Access Turkish Unicode Converter Tools">
       <action
               id="com.tolgagureli.UnicodeConverterToolWindowFactory"
               class="com.tolgagureli.turkishunicodeconverter.UnicodeConverterToolWindowFactory"
               text="Turkish Unicode Converter"
               description="Open the Turkish Unicode Converter tool window."
               icon="/icons/t-icon.png"/>
-      <add-to-group group-id="MainMenu" anchor="last"/>
+      <add-to-group group-id="ToolsMenu" anchor="last"/>
     </group>
   </actions>
 
