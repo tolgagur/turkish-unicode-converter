@@ -21,6 +21,10 @@
       <li>Instant conversion of Turkish characters.</li>
       <li>User-friendly interface for easy access.</li>
       <li>Available in the main menu for quick use.</li>
+      <li>Real-time text conversion with copy-to-clipboard functionality.</li>
+      <li>Comprehensive support for common Turkish characters like ç, Ç, ğ, Ğ, ö, Ö, ş, Ş, ü, Ü, ı, and İ.</li>
+      <li>Interactive table showing the mapping between Turkish letters and their Unicode values.</li>
+      <li>Allows users to quickly copy the converted text directly to the clipboard for easy use in other applications.</li>
     </ul>
     <br>
     <strong>Get started</strong> by using the tool from the main menu and enhance your coding experience with accurate Unicode conversions.
