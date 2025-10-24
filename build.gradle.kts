@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.tolgagureli"
-version = "1.2"  // Burayı gerektiği şekilde güncelleyebilirsiniz.
+version = "1.3"  // Burayı gerektiği şekilde güncelleyebilirsiniz.
 
 repositories {
   mavenCentral()
