@@ -36,9 +36,14 @@
 
   <!-- Extension points defined by the plugin.
        Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
-  <extensions defaultExtensionNs="com.intellij">
-    <!-- You can define your extension points here -->
-  </extensions>
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow
+                id="Turkish Unicode Converter"
+                anchor="right"
+                factoryClass="com.tolgagureli.turkishunicodeconverter.UnicodeConverterToolWindowFactory"
+                icon="/icons/turkishFlag.svg"
+        />
+    </extensions>
 
   <actions>
     <group id="com.tolgagureli.turkishunicodeconverter.UnicodeConverterAction" text="Turkish Unicode Converter" description="Access Turkish Unicode Converter Tools">

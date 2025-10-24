@@ -11,6 +11,12 @@ repositories {
   mavenCentral()
 }
 
+java {
+  toolchain {
+    languageVersion.set(JavaLanguageVersion.of(17))
+  }
+}
+
 // JUnit 5 bağımlılığını ekliyoruz
 dependencies {
   testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
