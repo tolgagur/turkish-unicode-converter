@@ -35,10 +35,19 @@ public class UnicodeConverterToolWindowFactory implements ToolWindowFactory {
 
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
-        JPanel mainPanel = createMainPanel();
-        ContentFactory contentFactory = ContentFactory.getInstance();
-        com.intellij.ui.content.Content content = contentFactory.createContent(mainPanel, "", false);
-        toolWindow.getContentManager().addContent(content);
+        Runnable createUi = () -> {
+            JPanel mainPanel = createMainPanel();
+            ContentFactory contentFactory = ContentFactory.getInstance();
+            com.intellij.ui.content.Content content = contentFactory.createContent(mainPanel, "", false);
+            toolWindow.getContentManager().addContent(content);
+        };
+
+        // UI oluşturmanın EDT üzerinde çalıştığından emin olun
+        if (SwingUtilities.isEventDispatchThread()) {
+            createUi.run();
+        } else {
+            SwingUtilities.invokeLater(createUi);
+        }
     }
 
     private JPanel createMainPanel() {
@@ -73,7 +82,7 @@ public class UnicodeConverterToolWindowFactory implements ToolWindowFactory {
         header.setBackground(new JBColor(new Color(60, 63, 65), new Color(60, 63, 65)));
         header.setBorder(JBUI.Borders.empty(15, 20));
 
-        JLabel title = new JLabel("🇹🇷 Turkish Unicode Converter");
+        JLabel title = new JLabel("Turkish Unicode Converter");
         title.setFont(JBUI.Fonts.label().asBold().deriveFont(18f));
         title.setForeground(new JBColor(new Color(187, 187, 187), new Color(187, 187, 187)));
 

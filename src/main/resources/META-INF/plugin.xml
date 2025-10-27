@@ -39,15 +39,12 @@
         <!--
           Notlar:
           - ToolWindow ikonu 13x13 olmalıdır. Eğer elinizde 13x13 ikon yoksa en hızlı çözüm burada icon özniteliğini kaldırmaktır.
-          - Daha önceki sürümlerde plugin.xml içinde yanlış bir <actions> bloğu ToolWindowFactory'yi bir action olarak referans veriyor olabilir.
-            Eğer proje içinde bir <actions> tanımı varsa ve id/com.tolgagureli.UnicodeConverterToolWindowFactory gibi bir referans görüyorsanız
-            o bloğu kaldırın ya da gerçek bir AnAction sınıfı ile değiştirin (ToolWindowFactory bir AnAction değildir).
+          - ToolWindow id'si sınıfınızdaki TOOL_WINDOW_ID ile birebir eşleşmelidir (boşluk/küçük-büyük harf farkı sorun yaratır).
         -->
         <toolWindow
-                id="Turkish Unicode Converter"
+                id="TurkishUnicodeConverter"
                 anchor="right"
                 factoryClass="com.tolgagureli.turkishunicodeconverter.UnicodeConverterToolWindowFactory"
-                icon="/icons/t-icon.png"
         />
     </extensions>
 
