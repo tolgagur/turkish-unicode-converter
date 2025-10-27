@@ -20,6 +20,9 @@ import static javax.swing.SwingConstants.CENTER;
 
 public class UnicodeConverterToolWindowFactory implements ToolWindowFactory {
 
+    // ToolWindow ID: plugin.xml'deki id ile eşleşmelidir
+    public static final String TOOL_WINDOW_ID = "TurkishUnicodeConverter";
+
     private static final Object[][] DATA = {
             {"ç", "\\u00E7"}, {"Ç", "\\u00C7"},
             {"ğ", "\\u011F"}, {"Ğ", "\\u011E"},

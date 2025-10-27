@@ -34,27 +34,22 @@
        Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
   <depends>com.intellij.modules.platform</depends>
 
-  <!-- Extension points defined by the plugin.
-       Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+  <!-- Extension points defined by the plugin. -->
     <extensions defaultExtensionNs="com.intellij">
+        <!--
+          Notlar:
+          - ToolWindow ikonu 13x13 olmalıdır. Eğer elinizde 13x13 ikon yoksa en hızlı çözüm burada icon özniteliğini kaldırmaktır.
+          - Daha önceki sürümlerde plugin.xml içinde yanlış bir <actions> bloğu ToolWindowFactory'yi bir action olarak referans veriyor olabilir.
+            Eğer proje içinde bir <actions> tanımı varsa ve id/com.tolgagureli.UnicodeConverterToolWindowFactory gibi bir referans görüyorsanız
+            o bloğu kaldırın ya da gerçek bir AnAction sınıfı ile değiştirin (ToolWindowFactory bir AnAction değildir).
+        -->
         <toolWindow
                 id="Turkish Unicode Converter"
                 anchor="right"
                 factoryClass="com.tolgagureli.turkishunicodeconverter.UnicodeConverterToolWindowFactory"
-                icon="/icons/turkishFlag.svg"
+                icon="/icons/t-icon.png"
         />
     </extensions>
 
-  <actions>
-    <group id="com.tolgagureli.turkishunicodeconverter.UnicodeConverterAction" text="Turkish Unicode Converter" description="Access Turkish Unicode Converter Tools">
-      <action
-              id="com.tolgagureli.UnicodeConverterToolWindowFactory"
-              class="com.tolgagureli.turkishunicodeconverter.UnicodeConverterToolWindowFactory"
-              text="Turkish Unicode Converter"
-              description="Open the Turkish Unicode Converter tool window."
-              icon="/icons/t-icon.png"/>
-      <add-to-group group-id="ToolsMenu" anchor="last"/>
-    </group>
-  </actions>
 
 </idea-plugin>
